@@ -1,5 +1,7 @@
 const socket = io('https://dicochat.herokuapp.com')
 
+const notifica = new Audio("blimp.mp3");
+
 const app = new Vue({
     el: "#app",
     data: {
@@ -58,6 +60,9 @@ socket.on('connect', function(){
 })
 
 socket.on('msg', function(msg){
+    if(msg.token !== app.me.token){
+        notifica.play()
+    }
     app.chat.push(msg)
 })
 
