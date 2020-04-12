@@ -1,4 +1,4 @@
-const socket = io('http://localhost:8000')
+const socket = io('https://dicochat.herokuapp.com')
 
 const app = new Vue({
     el: "#app",
