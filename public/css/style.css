@@ -263,6 +263,8 @@ body {
 .outgoing .bubble {
   background: #79C7C5;
   float: right;
+  word-break: break-all;
+  width: 100%;
 }
 
 .bottom-bar {
