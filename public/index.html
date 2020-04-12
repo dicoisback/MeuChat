@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu chat</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <div class="container" v-if="!estouConectado" class="nome">  
+                <div class="chatbox">
+                    <div class="background"></div>
+                    <div class="bottom-bar" style="border-radius: 0px;">
+                        <div class="chat">
+                          <form v-on:submit.prevent="entrarNoChat">
+                          <input v-model="nome" type="text" placeholder="Insira seu nome" />
+                          <button type="submit"><i class="fas fa-sign-in-alt"></i></button>
+                          </form>
+                        </div>
+                      </div>
+                </div>
+        </div>
+        <div v-else="" class="container"> 
+            <div class="chatbox">
+              <div class="top-bar">
+                <div class="avatar"><p>G</p></div>
+                <div class="name">Chat</div>
+                <div class="icons">
+                  <i class="fas fa-phone"></i>
+                  <i class="fas fa-video"></i>
+                </div>
+                <div class="menu">
+                  <div class="dots"></div>
+                </div>
+              </div>
+              <div class="middle">
+                <div class="voldemort">
+                <div class="incoming" :class="{outgoing : data.token == me.token }" v-for="data in chat">
+                    <div class="bubble">
+                        <span>{{ data.name }} - </span>
+                        {{ data.msg }}
+                    </div>
+                </div>
+                <div class="typing" :class="{up: alguemDigitando}">
+                    <div class="bubble">
+                      <div class="ellipsis one"></div>
+                      <div class="ellipsis two"></div>
+                      <div class="ellipsis three"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="bottom-bar">
+                <div class="chat">
+                <form v-on:submit.prevent="enviarMensagem">
+                  <input @keyup="digitando" v-model="msg" type="text" placeholder="Envie uma mensagem" />
+                  <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+                </div>
+              </div>
+            </div>
+            <div class="messages"></div>
+            <div class="profile">
+              <div class="avatar"><p>{{nome[0]}}</p></div>
+            </div>
+            <ul class="people">
+              <li class="person focus">
+                <span class="title">Grupo principal </span>
+                <span class="time">2:50pm</span><br>
+              </li>
+              <li v-if="user.token !== me.token" class="person focus" v-for="user in users">
+                <span class="title">{{ user.nome }} </span>
+                <br>
+              </li>
+            </ul>
+        </div>
+    </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+      <script src="index.js"></script>
+</body>
+</html>
