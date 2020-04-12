@@ -8,6 +8,7 @@ body {
   display: grid;
   background: linear-gradient(to bottom left, #79C7C5 40%, #F9FBFF 100%);
   font-family: "Lato", sans-serif;
+  overflow: hidden;
 }
 
 .container {
@@ -202,11 +203,11 @@ body {
 }
 
 .typing {
-  position: absolute;
-  bottom: 16px;
-  left: 20px;
+  position: fixed;
+  bottom: 16%;
   transition: 0.4s ease;
   transform: scale(0);
+  margin-left: 18px;
 }
 .typing .bubble {
   background: #eaeaea;
